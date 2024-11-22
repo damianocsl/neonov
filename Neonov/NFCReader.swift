@@ -10,7 +10,7 @@ import CoreNFC
 
 @Observable
 public class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
-    public var startAlert = "Hold your iPhone near the tag."
+    public var startAlert = "Hold your pen near the tag."
     public var raw = "Raw Data will be available after scan."
     public var showAlert: Bool = false
     
