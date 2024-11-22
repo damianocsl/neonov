@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreNFC
 
 struct ContentView: View {
     var body: some View {
