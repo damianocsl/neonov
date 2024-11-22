@@ -29,9 +29,22 @@
 		AE36F1482CD3DEE00039801A /* NeonovUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NeonovUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AEFE254B2CF08C5C00D5389F /* Exceptions for "Neonov" folder in "Neonov" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = AE36F12D2CD3DEDF0039801A /* Neonov */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AE36F1302CD3DEDF0039801A /* Neonov */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AEFE254B2CF08C5C00D5389F /* Exceptions for "Neonov" folder in "Neonov" target */,
+			);
 			path = Neonov;
 			sourceTree = "<group>";
 		};
@@ -78,6 +91,7 @@
 				AE36F1302CD3DEDF0039801A /* Neonov */,
 				AE36F1412CD3DEE00039801A /* NeonovTests */,
 				AE36F14B2CD3DEE00039801A /* NeonovUITests */,
+				AE36F15B2CD3DF090039801A /* Frameworks */,
 				AE36F12F2CD3DEDF0039801A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +104,13 @@
 				AE36F1482CD3DEE00039801A /* NeonovUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AE36F15B2CD3DF090039801A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +216,8 @@
 			);
 			mainGroup = AE36F1252CD3DEDF0039801A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AE36F12F2CD3DEDF0039801A /* Products */;
 			projectDirPath = "";
@@ -393,11 +416,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Neonov/Neonov.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Neonov/Preview Content\"";
+				DEVELOPMENT_TEAM = QZMWNH2R72;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Neonov/Info.plist;
+				INFOPLIST_KEY_NFCReaderUsageDescription = "Use NFC to read insulin doses from smart insulin pens for diabetes management.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -408,7 +435,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.damianocsl.Neonov;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.damianocsl.Neonov-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -421,11 +448,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Neonov/Neonov.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Neonov/Preview Content\"";
+				DEVELOPMENT_TEAM = QZMWNH2R72;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Neonov/Info.plist;
+				INFOPLIST_KEY_NFCReaderUsageDescription = "Use NFC to read insulin doses from smart insulin pens for diabetes management.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -436,7 +467,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.damianocsl.Neonov;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.damianocsl.Neonov-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
