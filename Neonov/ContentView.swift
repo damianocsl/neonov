@@ -19,6 +19,8 @@ struct ContentView: View {
             }
             Text("NFC data: \(NFCR.raw)")
         }
+        .alert("NFC data: \(NFCR.raw)", isPresented: $NFCR.showAlert) {
+            Button("OK", role: .cancel) { }
         }
         Navigation
         .padding()
