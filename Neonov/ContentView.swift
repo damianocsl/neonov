@@ -9,6 +9,9 @@ import SwiftUI
 import CoreNFC
 
 struct ContentView: View {
+    @State private var NFCR = NFCReader()
+    @State public var showingAlert = false
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
