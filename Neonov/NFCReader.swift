@@ -45,6 +45,16 @@ public class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
                 print(data)
                 let dataString = String(data: data, encoding:.utf8)
                 print(dataString ?? "no dataString")
+                let hexString = data.map { String(format: "%02x", $0) }.joined()
+                let hexString2 = data.map { String(format: "%02hhx", $0) }.joined()
+                print(hexString)
+                print(hexString2)
+                let base64String = data.base64EncodedString()
+                print(base64String)
+                
+                // read data from novopen echo plus
+                let dataMessage = String(data: messages[0].records[0].payload, encoding:.utf8)
+                print("Raw message: \(dataMessage ?? "no dataMessage")")
             }
             
             if messages.count > 0, let dataMessage = String(data: messages[0].records[0].payload, encoding:.utf8) {
