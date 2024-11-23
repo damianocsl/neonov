@@ -12,17 +12,31 @@ struct ContentView: View {
     @State private var NFCR = NFCReader()
     @State public var showingAlert = false
     
+    func readNfc() {
+        NFCR.read()
+    }
+    
     var body: some View {
         VStack {
-            Button("Scan pen") {
-                NFCR.read()
+            HStack {
+                Spacer()
+                Button(action: readNfc) {
+                    Image(systemName: "wave.3.right")
+                }
             }
-            Text("NFC data: \(NFCR.raw)")
+            TabView {
+                Text("NFC data: \(NFCR.raw)")
+                    .tabItem {
+                        Image(systemName: "syringe")
+                        Text("Log")
+                    }
+                Text("Settings")
+                    .tabItem {
+                        Image(systemName: "gearshape")
+                        Text("Settings")
+                    }
+            }
         }
-        .alert("NFC data: \(NFCR.raw)", isPresented: $NFCR.showAlert) {
-            Button("OK", role: .cancel) { }
-        }
-        Navigation
         .padding()
     }
 }

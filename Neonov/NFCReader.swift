@@ -12,9 +12,12 @@ import CoreNFC
 public class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
     public var startAlert = "Hold your pen near the tag."
     public var raw = "Raw Data will be available after scan."
-    public var showAlert: Bool = false
     
+    // Reference the NFC session
     private var session: NFCNDEFReaderSession?
+    
+    // Reference the found NFC messages
+    private var nfcMessages: [[NFCNDEFMessage]] = []
     
     public func read() {
         guard NFCNDEFReaderSession.readingAvailable else {
@@ -22,20 +25,26 @@ public class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
             return
         }
         
-        session = NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
-        session?.alertMessage = self.startAlert
-        session?.begin()
+        // Create the NFC Reader Session
+        self.session = NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
+        
+        // A custom description that helps users understand how they can use NFC reader mode in the app.
+        self.session?.alertMessage = self.startAlert
+        
+        // Begin scanning
+        self.session?.begin()
     }
     
     public func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
-        DispatchQueue.main.async {
-            print("Detected NDEF messages:")
-            print(messages.count)
-            
-            if messages.count > 0 {
-                let message = messages[0]
-                print(message)
-                let record = message.records[0]
+        print("New NFC Tag detected:")
+        
+        for message in messages {
+            for record in message.records {
+                print("Type name format: \(record.typeNameFormat)")
+                print("Payload: \(record.payload)")
+                print("Type: \(record.type)")
+                print("Identifier: \(record.identifier)")
+                
                 print(record)
                 let payload = record.payload
                 print(payload)
@@ -53,19 +62,23 @@ public class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
                 print(base64String)
                 
                 // read data from novopen echo plus
-                let dataMessage = String(data: messages[0].records[0].payload, encoding:.utf8)
+                let dataMessage = String(data: record.payload, encoding:.utf8)
                 print("Raw message: \(dataMessage ?? "no dataMessage")")
             }
+        }
+        
+        // Add the new messages to our found messages
+        self.nfcMessages.append(messages)
             
-            if messages.count > 0, let dataMessage = String(data: messages[0].records[0].payload, encoding:.utf8) {
-                print("Raw message: \(dataMessage)")
-                self.raw = dataMessage
-            }
-            
-            // Optionally show an alert here
-            self.showAlert = true
-            
-            // Continue scanning after reading the first tag
+        if messages.count > 0 {
+            let payload = messages[0].records[0].payload
+            print("Raw message: \(payload)")
+            self.raw = String(describing: payload)
+        }
+        
+        
+        DispatchQueue.main.async {
+            // Reload any view on the main-thread to display the new data-set
         }
     }
     
@@ -75,8 +88,26 @@ public class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
     }
     
     public func readerSession(_ session: NFCNDEFReaderSession, didInvalidateWithError error: Error) {
-        print("Session did invalidate with error: \(error)")
+        print("Error reading NFC: \(error.localizedDescription)")
         self.session = nil
     }
 }
 
+//extension NFCTableViewController {
+//    
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        let numberOfMessages = self.nfcMessages[section].count
+//        let headerTitle = numberOfMessages == 1 ? "One Message" : "\(numberOfMessages) Messages"
+//        
+//        return headerTitle
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "NFCTableCell", for: indexPath) as! NFCTableViewCell
+//        let nfcTag = self.nfcMessages[indexPath.section][indexPath.row]
+//        
+//        cell.textLabel?.text = "\(nfcTag.records.count) Records"
+//        
+//        return cell
+//    }
+//}
