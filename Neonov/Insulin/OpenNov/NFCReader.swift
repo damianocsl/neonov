@@ -2,7 +2,7 @@
 //  NFCReader.swift
 //  Neonov
 //
-//  Created by Damiano on 31/10/24.
+//  Created by Damiano on 24/11/24.
 //
 
 import Foundation
@@ -94,20 +94,20 @@ public class NFCReader: NSObject, NFCNDEFReaderSessionDelegate {
 }
 
 //extension NFCTableViewController {
-//    
+//
 //    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 //        let numberOfMessages = self.nfcMessages[section].count
 //        let headerTitle = numberOfMessages == 1 ? "One Message" : "\(numberOfMessages) Messages"
-//        
+//
 //        return headerTitle
 //    }
-//    
+//
 //    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "NFCTableCell", for: indexPath) as! NFCTableViewCell
 //        let nfcTag = self.nfcMessages[indexPath.section][indexPath.row]
-//        
+//
 //        cell.textLabel?.text = "\(nfcTag.records.count) Records"
-//        
+//
 //        return cell
 //    }
 //}
