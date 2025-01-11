@@ -9,11 +9,11 @@ import SwiftUI
 import CoreNFC
 
 struct ContentView: View {
-    @State private var NFCR = NFCReader()
+//    @State private var NFCR = NFCReader()
     @State public var showingAlert = false
     
     func readNfc() {
-        NFCR.read()
+//        NFCR.read()
     }
     
     var body: some View {
@@ -25,11 +25,11 @@ struct ContentView: View {
                 }
             }
             TabView {
-                Text("NFC data: \(NFCR.raw)")
-                    .tabItem {
-                        Image(systemName: "syringe")
-                        Text("Log")
-                    }
+//                Text("NFC data: \(NFCR.raw)")
+//                    .tabItem {
+//                        Image(systemName: "syringe")
+//                        Text("Log")
+//                    }
                 Text("Settings")
                     .tabItem {
                         Image(systemName: "gearshape")
