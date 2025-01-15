@@ -44,8 +44,31 @@ public class NFCPenReader: NSObject, NFCTagReaderSessionDelegate {
                 
                 if case let .iso7816(iso7816Tag) = tag {
                     print("ISO7816 Tag detected")
-//                    let apdu = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0xB0, p1Parameter: 0x00, p2Parameter: 0x00, data: Data(), expectedResponseLength: 65536)
-//                    iso7816Tag.sendCommand(apdu: apdu) { (data, sw1, sw2, error) in
+                    
+                    print("tag.isAvailable", tag.isAvailable)
+                    
+                    let apdu = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0xB0, p1Parameter: 0x00, p2Parameter: 0x00, data: Data(), expectedResponseLength: 255)
+                    iso7816Tag.sendCommand(apdu: apdu) { (data, sw1, sw2, error) in
+                        if error != nil {
+                            print("Error sending command to tag: \(error!.localizedDescription)")
+                            return
+                        }
+                        print("data: \(data)")
+                        print("sw1.description: \(sw1.description)")
+                        print("sw2.description: \(sw2.description)")
+                        print("sw1.hashValue: \(sw1.hashValue)")
+                        print("sw2.hashValue: \(sw2.hashValue)")
+                        print("Response from tag: \(data.hexEncodedString())")
+                        self.raw = data.hexEncodedString()
+                    }
+
+                    // java version
+                    // private static final int CLA = 0x00;
+                    // private static final int INS_SL = 0xA4;
+                    // private static final int BY_NAME = 0x04;
+                    // private static final int FIRST_ONLY = 0x0C;
+//                    let apdu2 = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0xA4, p1Parameter: 0x04, p2Parameter: 0x0C, data: Data(), expectedResponseLength: 255)
+//                    iso7816Tag.sendCommand(apdu: apdu2) { (data, sw1, sw2, error) in
 //                        if error != nil {
 //                            print("Error sending command to tag: \(error!.localizedDescription)")
 //                            return
@@ -58,26 +81,6 @@ public class NFCPenReader: NSObject, NFCTagReaderSessionDelegate {
 //                        print("Response from tag: \(data.hexEncodedString())")
 //                        self.raw = data.hexEncodedString()
 //                    }
-
-                    // java version
-                    // private static final int CLA = 0x00;
-                    // private static final int INS_SL = 0xA4;
-                    // private static final int BY_NAME = 0x04;
-                    // private static final int FIRST_ONLY = 0x0C;
-                    let apdu2 = NFCISO7816APDU(instructionClass: 0x00, instructionCode: 0xA4, p1Parameter: 0x04, p2Parameter: 0x0C, data: Data(), expectedResponseLength: 255)
-                    iso7816Tag.sendCommand(apdu: apdu2) { (data, sw1, sw2, error) in
-                        if error != nil {
-                            print("Error sending command to tag: \(error!.localizedDescription)")
-                            return
-                        }
-                        print(data)
-                        print(sw1)
-                        print(sw2)
-                        print(sw1.description)
-                        print(sw2.description)
-                        print("Response from tag: \(data.hexEncodedString())")
-                        self.raw = data.hexEncodedString()
-                    }
                 }
             }
         }
